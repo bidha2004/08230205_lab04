@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Learning Journey</title>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>My Learning Journey</h1>
+        <p class="quote">"{{ journey.quote }}"</p>
+        <nav>
+            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'about' %}">About Me</a>
+        </nav>
+    </header>
+
+    <section class="content">
+        <div class="journey">
+            <h2>Experience</h2>
+            <p>{{ journey.experience }}</p>
+
+            <h2>Challenges</h2>
+            <p>{{ journey.challenges }}</p>
+
+            <h2>Learning Timeline</h2>
+            <ul class="timeline">
+                {% for phase in journey.phases.all %}
+                    <li>
+                        <span>{{ phase.phase_title }}:</span> {{ phase.description }}
+                    </li>
+                {% empty %}
+                    <li>No phases added yet. Please add them from the admin panel.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 My Learning Journey | Designed with ☕ and dedication</p>
+    </footer>
+</body>
+</html>
